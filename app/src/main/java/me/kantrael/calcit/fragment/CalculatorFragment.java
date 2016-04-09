@@ -93,17 +93,17 @@ public class CalculatorFragment extends Fragment implements
             return;
         }
 
-        String resultText = "";
+        String resultText;
         if (calculator.getError() == Calculator.CalculatorError.DIVIDE_BY_ZERO) {
             resultText = getString(R.string.fragment_calculator_error);
         } else {
-            resultText = StringUtils.doubleToString(calculator.getCurrentOperand());
+            resultText = calculator.getCurrentOperand();
         }
         textViewResult.setText(resultText);
 
         String previousOperandText = "";
         if (calculator.hasPreviousOperand()) {
-            String operand = StringUtils.doubleToString(calculator.getPreviousOperand());
+            String operand = calculator.getPreviousOperand();
             String operator = StringUtils.calculatorOperatorToCharacter(calculator.getOperator());
 
             if (operand != null && operator != null) {

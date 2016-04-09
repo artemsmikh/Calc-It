@@ -11,6 +11,14 @@ public class StringUtils {
         }
     }
 
+    public static double stringToDouble(String value) {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
     public static String calculatorOperatorToCharacter(Calculator.CalculatorOperator operator) {
         if (operator != null) {
             switch (operator) {

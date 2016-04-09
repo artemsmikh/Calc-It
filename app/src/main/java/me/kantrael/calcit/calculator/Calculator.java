@@ -1,35 +1,18 @@
 package me.kantrael.calcit.calculator;
 
-import android.util.Log;
+import me.kantrael.calcit.util.StringUtils;
 
 public class Calculator {
 
-    public interface OnCalculatorResultChangedListener {
-        void onCalculatorStateChanged();
-    }
-
-    public enum CalculatorOperator {
-        ADD, SUBTRACT, MULTIPLY, DIVIDE
-    }
-
-    public enum CalculatorDigit {
-        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
-    }
-
-    public enum CalculatorError {
-        DIVIDE_BY_ZERO
-    }
-
-
     private OnCalculatorResultChangedListener onCalculatorResultChangedListener;
-
-    private double currentOperand;
-    private double previousOperand;
+    private String previousOperand;
+    private String currentOperand;
     private CalculatorOperator operator;
     private CalculatorError error;
     private boolean needToClearOperandBeforeAppend;
 
     public Calculator() {
+        currentOperand = "0";
     }
 
 
@@ -41,11 +24,11 @@ public class Calculator {
         this.onCalculatorResultChangedListener = onCalculatorResultChangedListener;
     }
 
-    public double getCurrentOperand() {
+    public String getCurrentOperand() {
         return currentOperand;
     }
 
-    public double getPreviousOperand() {
+    public String getPreviousOperand() {
         return previousOperand;
     }
 
@@ -61,6 +44,7 @@ public class Calculator {
         return error;
     }
 
+
     /*
      * Actions
      */
@@ -74,43 +58,43 @@ public class Calculator {
 
         switch (digit) {
             case ZERO:
-                appendOperandDigit(0);
+                appendOperandDigit("0");
                 break;
 
             case ONE:
-                appendOperandDigit(1);
+                appendOperandDigit("1");
                 break;
 
             case TWO:
-                appendOperandDigit(2);
+                appendOperandDigit("2");
                 break;
 
             case THREE:
-                appendOperandDigit(3);
+                appendOperandDigit("3");
                 break;
 
             case FOUR:
-                appendOperandDigit(4);
+                appendOperandDigit("4");
                 break;
 
             case FIVE:
-                appendOperandDigit(5);
+                appendOperandDigit("5");
                 break;
 
             case SIX:
-                appendOperandDigit(6);
+                appendOperandDigit("6");
                 break;
 
             case SEVEN:
-                appendOperandDigit(7);
+                appendOperandDigit("7");
                 break;
 
             case EIGHT:
-                appendOperandDigit(8);
+                appendOperandDigit("8");
                 break;
 
             case NINE:
-                appendOperandDigit(9);
+                appendOperandDigit("9");
                 break;
         }
         notifyListenerStateChanged();
@@ -123,7 +107,7 @@ public class Calculator {
 
         clearErrorState();
 
-        double operandToShow = currentOperand;
+        String operandToShow = currentOperand;
         if (calculateCurrentExpression()) {
             previousOperand = currentOperand;
             currentOperand = operandToShow;
@@ -145,24 +129,31 @@ public class Calculator {
     public void clear() {
         clearErrorState();
         clearPreviousOperandAndOperator();
-        currentOperand = 0;
+        currentOperand = "0";
 
         notifyListenerStateChanged();
     }
 
 
     /*
-     * Util methods
+     * Private methods
      */
 
-    private void appendOperandDigit(int digit) {
-        if (digit != 0 || currentOperand != 0) {
+    private void appendOperandDigit(String digit) {
+        if (digit == null) {
+            return;
+        }
+
+        if (!digit.equals("0") || !currentOperand.equals("0")) {
             if (needToClearOperandBeforeAppend) {
-                currentOperand = 0;
+                currentOperand = "0";
                 needToClearOperandBeforeAppend = false;
             }
-            currentOperand *= 10;
-            currentOperand += digit;
+            if (currentOperand.equals("0")) {
+                currentOperand = digit;
+            } else {
+                currentOperand += digit;
+            }
         }
     }
 
@@ -173,26 +164,29 @@ public class Calculator {
     }
 
     private boolean calculateCurrentExpression() {
-        if (operator == null) {
+        if (operator == null || currentOperand == null || previousOperand == null) {
             return true;
         }
 
+        double currentValue = StringUtils.stringToDouble(currentOperand);
+        double previousValue = StringUtils.stringToDouble(previousOperand);
+
         switch (operator) {
             case ADD:
-                currentOperand = previousOperand + currentOperand;
+                currentOperand = StringUtils.doubleToString(previousValue + currentValue);
                 break;
 
             case SUBTRACT:
-                currentOperand = previousOperand - currentOperand;
+                currentOperand = StringUtils.doubleToString(previousValue - currentValue);
                 break;
 
             case MULTIPLY:
-                currentOperand = previousOperand * currentOperand;
+                currentOperand = StringUtils.doubleToString(previousValue * currentValue);
                 break;
 
             case DIVIDE:
-                if (currentOperand != 0) {
-                    currentOperand = previousOperand / currentOperand;
+                if (currentValue != 0) {
+                    currentOperand = StringUtils.doubleToString(previousValue / currentValue);
                 } else {
                     error = CalculatorError.DIVIDE_BY_ZERO;
                     return false;
@@ -207,7 +201,28 @@ public class Calculator {
     }
 
     private void clearPreviousOperandAndOperator() {
-        previousOperand = 0;
+        previousOperand = null;
         operator = null;
+    }
+
+
+    /*
+     * Enumerations and interfaces
+     */
+
+    public enum CalculatorOperator {
+        ADD, SUBTRACT, MULTIPLY, DIVIDE
+    }
+
+    public enum CalculatorDigit {
+        ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
+    }
+
+    public enum CalculatorError {
+        DIVIDE_BY_ZERO
+    }
+
+    public interface OnCalculatorResultChangedListener {
+        void onCalculatorStateChanged();
     }
 }
