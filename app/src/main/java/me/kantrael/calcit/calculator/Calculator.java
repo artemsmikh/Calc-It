@@ -7,7 +7,8 @@ public class Calculator {
     private OnCalculatorResultChangedListener onCalculatorResultChangedListener;
     private String previousOperand;
     private String currentOperand;
-    private CalculatorOperator operator;
+    private String memoryOperand;
+    private BinaryOperator operator;
     private CalculatorError error;
     private boolean needToClearOperandBeforeAppend;
 
@@ -32,7 +33,7 @@ public class Calculator {
         return previousOperand;
     }
 
-    public CalculatorOperator getOperator() {
+    public BinaryOperator getOperator() {
         return operator;
     }
 
@@ -42,6 +43,10 @@ public class Calculator {
 
     public CalculatorError getError() {
         return error;
+    }
+
+    public boolean hasOperandInMemory() {
+        return memoryOperand != null;
     }
 
 
@@ -100,19 +105,67 @@ public class Calculator {
         notifyListenerStateChanged();
     }
 
-    public void applyOperator(CalculatorOperator op) {
+    public void appendDot() {
+        if (!currentOperandHasDot() || needToClearOperandBeforeAppend) {
+            clearErrorState();
+
+            if (needToClearOperandBeforeAppend) {
+                currentOperand = "0.";
+                needToClearOperandBeforeAppend = false;
+            } else {
+                currentOperand += ".";
+            }
+
+            notifyListenerStateChanged();
+        }
+    }
+
+    public void applyBinaryOperator(BinaryOperator op) {
         if (op == null) {
             return;
         }
 
         clearErrorState();
 
-        String operandToShow = currentOperand;
+        String operandToShow = getCurrentOperandWithoutTrailingDot();
         if (calculateCurrentExpression()) {
-            previousOperand = currentOperand;
+            previousOperand = getCurrentOperandWithoutTrailingDot();
             currentOperand = operandToShow;
             needToClearOperandBeforeAppend = true;
             operator = op;
+        }
+
+        notifyListenerStateChanged();
+    }
+
+    public void applyUnaryOperator(UnaryOperator op) {
+        if (op == null || getCurrentOperandWithoutTrailingDot() == null) {
+            return;
+        }
+
+        clearErrorState();
+
+        double currentValue = StringUtils.stringToDouble(getCurrentOperandWithoutTrailingDot());
+
+        switch (op) {
+            case INVERSE:
+                currentOperand = StringUtils.doubleToString(currentValue * -1);
+                needToClearOperandBeforeAppend = true;
+                break;
+
+            case RECIPROCAL:
+                if (currentValue == 0) {
+                    error = CalculatorError.DIVIDE_BY_ZERO;
+                } else {
+                    currentOperand = StringUtils.doubleToString(1 / currentValue);
+                    needToClearOperandBeforeAppend = true;
+                }
+                break;
+
+            case SQRT:
+                currentOperand = StringUtils.doubleToString(Math.sqrt(currentValue));
+                needToClearOperandBeforeAppend = true;
+                break;
         }
 
         notifyListenerStateChanged();
@@ -132,6 +185,25 @@ public class Calculator {
         currentOperand = "0";
 
         notifyListenerStateChanged();
+    }
+
+    public void memorySave() {
+        memoryOperand = getCurrentOperandWithoutTrailingDot();
+        needToClearOperandBeforeAppend = true;
+        notifyListenerStateChanged();
+    }
+
+    public void memoryClear() {
+        memoryOperand = null;
+        notifyListenerStateChanged();
+    }
+
+    public void memoryRestore() {
+        if (memoryOperand != null) {
+            currentOperand = memoryOperand;
+            needToClearOperandBeforeAppend = true;
+            notifyListenerStateChanged();
+        }
     }
 
 
@@ -164,11 +236,11 @@ public class Calculator {
     }
 
     private boolean calculateCurrentExpression() {
-        if (operator == null || currentOperand == null || previousOperand == null) {
+        if (operator == null || getCurrentOperandWithoutTrailingDot() == null || previousOperand == null) {
             return true;
         }
 
-        double currentValue = StringUtils.stringToDouble(currentOperand);
+        double currentValue = StringUtils.stringToDouble(getCurrentOperandWithoutTrailingDot());
         double previousValue = StringUtils.stringToDouble(previousOperand);
 
         switch (operator) {
@@ -192,6 +264,15 @@ public class Calculator {
                     return false;
                 }
                 break;
+
+            case REMAINDER:
+                if (currentValue != 0) {
+                    currentOperand = StringUtils.doubleToString(previousValue % currentValue);
+                } else {
+                    error = CalculatorError.DIVIDE_BY_ZERO;
+                    return false;
+                }
+                break;
         }
         return true;
     }
@@ -205,13 +286,32 @@ public class Calculator {
         operator = null;
     }
 
+    private boolean currentOperandHasDot() {
+        return currentOperand != null && currentOperand.contains(".");
+    }
+
+    private boolean currentOperandHasDotAtTheEnd() {
+        return currentOperand != null && currentOperand.endsWith(".");
+    }
+
+    private String getCurrentOperandWithoutTrailingDot() {
+        if (currentOperandHasDotAtTheEnd()) {
+            return currentOperand.substring(0, currentOperand.length() - 1);
+        }
+        return currentOperand;
+    }
+
 
     /*
      * Enumerations and interfaces
      */
 
-    public enum CalculatorOperator {
-        ADD, SUBTRACT, MULTIPLY, DIVIDE
+    public enum BinaryOperator {
+        ADD, SUBTRACT, MULTIPLY, DIVIDE, REMAINDER
+    }
+
+    public enum UnaryOperator {
+        INVERSE, RECIPROCAL, SQRT
     }
 
     public enum CalculatorDigit {

@@ -14,6 +14,13 @@
         android:padding="@dimen/calculator_result_field_padding">
 
         <TextView
+            android:id="@+id/fragment_calculator_textView_memory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:textColor="@color/colorFont" />
+
+        <TextView
             android:id="@+id/fragment_calculator_textView_previous_operand"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,69 +42,119 @@
         android:layout_marginTop="@dimen/calculator_buttons_top_margin"
         android:columnCount="4">
 
-        <Button
-            android:id="@+id/fragment_calculator_button_7"
-            android:text="@string/fragment_calculator_button_7" />
+
+        <!-- First row -->
 
         <Button
-            android:id="@+id/fragment_calculator_button_8"
-            android:text="@string/fragment_calculator_button_8" />
+            android:id="@+id/fragment_calculator_button_memory_clear"
+            android:text="@string/calculator_action_memory_clear" />
 
         <Button
-            android:id="@+id/fragment_calculator_button_9"
-            android:text="@string/fragment_calculator_button_9" />
+            android:id="@+id/fragment_calculator_button_memory_restore"
+            android:text="@string/calculator_action_memory_restore" />
 
         <Button
-            android:id="@+id/fragment_calculator_button_add"
-            android:text="@string/fragment_calculator_button_add" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_4"
-            android:text="@string/fragment_calculator_button_4" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_5"
-            android:text="@string/fragment_calculator_button_5" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_6"
-            android:text="@string/fragment_calculator_button_6" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_subtract"
-            android:text="@string/fragment_calculator_button_subtract" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_1"
-            android:text="@string/fragment_calculator_button_1" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_2"
-            android:text="@string/fragment_calculator_button_2" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_3"
-            android:text="@string/fragment_calculator_button_3" />
-
-        <Button
-            android:id="@+id/fragment_calculator_button_multiply"
-            android:text="@string/fragment_calculator_button_multiply" />
+            android:id="@+id/fragment_calculator_button_memory_save"
+            android:text="@string/calculator_action_memory_save" />
 
         <Button
             android:id="@+id/fragment_calculator_button_clear"
-            android:text="@string/fragment_calculator_button_clear" />
+            android:text="@string/calculator_action_clear" />
+
+
+        <!-- Second row -->
 
         <Button
-            android:id="@+id/fragment_calculator_button_0"
-            android:text="@string/fragment_calculator_button_0" />
+            android:id="@+id/fragment_calculator_button_remainder"
+            android:text="@string/calculator_operation_remainder" />
 
         <Button
-            android:id="@+id/fragment_calculator_button_calculate"
-            android:text="@string/fragment_calculator_button_calculate" />
+            android:id="@+id/fragment_calculator_button_inverse"
+            android:text="@string/calculator_operation_inverse" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_reciprocal"
+            android:text="@string/calculator_operation_reciprocal" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_sqrt"
+            android:text="@string/calculator_operation_sqrt" />
+
+
+        <!-- Third row -->
+
+        <Button
+            android:id="@+id/fragment_calculator_button_7"
+            android:text="@string/calculator_digit_7" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_8"
+            android:text="@string/calculator_digit_8" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_9"
+            android:text="@string/calculator_digit_9" />
 
         <Button
             android:id="@+id/fragment_calculator_button_divide"
-            android:text="@string/fragment_calculator_button_divide" />
+            android:text="@string/calculator_operation_divide" />
+
+
+        <!-- Fourth row -->
+
+        <Button
+            android:id="@+id/fragment_calculator_button_4"
+            android:text="@string/calculator_digit_4" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_5"
+            android:text="@string/calculator_digit_5" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_6"
+            android:text="@string/calculator_digit_6" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_multiply"
+            android:text="@string/calculator_operation_multiply" />
+
+
+        <!-- Five row -->
+
+        <Button
+            android:id="@+id/fragment_calculator_button_1"
+            android:text="@string/calculator_digit_1" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_2"
+            android:text="@string/calculator_digit_2" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_3"
+            android:text="@string/calculator_digit_3" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_subtract"
+            android:text="@string/calculator_operation_subtract" />
+
+
+        <!-- Six row -->
+
+        <Button
+            android:id="@+id/fragment_calculator_button_dot"
+            android:text="@string/calculator_operation_dot" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_0"
+            android:text="@string/calculator_digit_0" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_calculate"
+            android:text="@string/calculator_operation_calculate" />
+
+        <Button
+            android:id="@+id/fragment_calculator_button_add"
+            android:text="@string/calculator_operation_add" />
 
     </GridLayout>
 

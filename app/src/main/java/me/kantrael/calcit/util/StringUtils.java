@@ -1,5 +1,8 @@
 package me.kantrael.calcit.util;
 
+import android.content.Context;
+
+import me.kantrael.calcit.R;
 import me.kantrael.calcit.calculator.Calculator;
 
 public class StringUtils {
@@ -19,20 +22,23 @@ public class StringUtils {
         }
     }
 
-    public static String calculatorOperatorToCharacter(Calculator.CalculatorOperator operator) {
+    public static String calculatorOperatorToCharacter(Calculator.BinaryOperator operator, Context context) {
         if (operator != null) {
             switch (operator) {
                 case ADD:
-                    return "+";
+                    return context.getString(R.string.calculator_operation_add);
 
                 case SUBTRACT:
-                    return "−";
+                    return context.getString(R.string.calculator_operation_subtract);
 
                 case MULTIPLY:
-                    return "×";
+                    return context.getString(R.string.calculator_operation_multiply);
 
                 case DIVIDE:
-                    return "÷";
+                    return context.getString(R.string.calculator_operation_divide);
+
+                case REMAINDER:
+                    return context.getString(R.string.calculator_operation_remainder);
             }
         }
         return null;

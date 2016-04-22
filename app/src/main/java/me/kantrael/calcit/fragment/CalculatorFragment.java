@@ -21,6 +21,7 @@ public class CalculatorFragment extends Fragment implements
     private Calculator calculator;
     private TextView textViewResult;
     private TextView textViewPreviousOperand;
+    private TextView textViewMemory;
 
 
     public CalculatorFragment() {
@@ -44,43 +45,53 @@ public class CalculatorFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calculator, container, false);
 
-        textViewResult = (TextView) view.findViewById(R.id.fragment_calculator_textView_result);
-        textViewPreviousOperand = (TextView) view.findViewById(R.id.fragment_calculator_textView_previous_operand);
+        textViewResult = (TextView) view.findViewById(
+                R.id.fragment_calculator_textView_result
+        );
+        textViewPreviousOperand = (TextView) view.findViewById(
+                R.id.fragment_calculator_textView_previous_operand
+        );
+        textViewMemory = (TextView) view.findViewById(
+                R.id.fragment_calculator_textView_memory
+        );
 
         updateCalculatorView();
 
-        assignButtonClickListener(R.id.fragment_calculator_button_0, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_1, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_2, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_3, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_4, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_5, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_6, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_7, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_8, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_9, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_add, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_subtract, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_multiply, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_divide, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_calculate, view);
-        assignButtonClickListener(R.id.fragment_calculator_button_clear, view);
+        int[] buttons = {
+                R.id.fragment_calculator_button_0,
+                R.id.fragment_calculator_button_1,
+                R.id.fragment_calculator_button_2,
+                R.id.fragment_calculator_button_3,
+                R.id.fragment_calculator_button_4,
+                R.id.fragment_calculator_button_5,
+                R.id.fragment_calculator_button_6,
+                R.id.fragment_calculator_button_7,
+                R.id.fragment_calculator_button_8,
+                R.id.fragment_calculator_button_9,
+                R.id.fragment_calculator_button_add,
+                R.id.fragment_calculator_button_subtract,
+                R.id.fragment_calculator_button_multiply,
+                R.id.fragment_calculator_button_divide,
+                R.id.fragment_calculator_button_calculate,
+                R.id.fragment_calculator_button_clear,
+                R.id.fragment_calculator_button_memory_clear,
+                R.id.fragment_calculator_button_memory_restore,
+                R.id.fragment_calculator_button_memory_save,
+                R.id.fragment_calculator_button_remainder,
+                R.id.fragment_calculator_button_reciprocal,
+                R.id.fragment_calculator_button_sqrt,
+                R.id.fragment_calculator_button_inverse,
+                R.id.fragment_calculator_button_dot
+        };
 
-        return view;
-    }
-
-
-    /*
-     * Actions
-     */
-
-    private void assignButtonClickListener(int buttonResId, View parent) {
-        if (parent != null) {
-            Button button = (Button) parent.findViewById(buttonResId);
+        for (int buttonId : buttons) {
+            Button button = (Button) view.findViewById(buttonId);
             if (button != null) {
                 button.setOnClickListener(this);
             }
         }
+
+        return view;
     }
 
 
@@ -95,7 +106,7 @@ public class CalculatorFragment extends Fragment implements
 
         String resultText;
         if (calculator.getError() == Calculator.CalculatorError.DIVIDE_BY_ZERO) {
-            resultText = getString(R.string.fragment_calculator_error);
+            resultText = getString(R.string.calculator_message_error);
         } else {
             resultText = calculator.getCurrentOperand();
         }
@@ -104,13 +115,21 @@ public class CalculatorFragment extends Fragment implements
         String previousOperandText = "";
         if (calculator.hasPreviousOperand()) {
             String operand = calculator.getPreviousOperand();
-            String operator = StringUtils.calculatorOperatorToCharacter(calculator.getOperator());
+            String operator = StringUtils.calculatorOperatorToCharacter(
+                    calculator.getOperator(),
+                    getActivity()
+            );
 
             if (operand != null && operator != null) {
                 previousOperandText = String.format("%s %s", operand, operator);
             }
         }
         textViewPreviousOperand.setText(previousOperandText);
+
+        textViewMemory.setText(calculator.hasOperandInMemory()
+                ? getString(R.string.calculator_message_memory)
+                : null
+        );
     }
 
 
@@ -162,19 +181,23 @@ public class CalculatorFragment extends Fragment implements
                 break;
 
             case R.id.fragment_calculator_button_add:
-                calculator.applyOperator(Calculator.CalculatorOperator.ADD);
+                calculator.applyBinaryOperator(Calculator.BinaryOperator.ADD);
                 break;
 
             case R.id.fragment_calculator_button_subtract:
-                calculator.applyOperator(Calculator.CalculatorOperator.SUBTRACT);
+                calculator.applyBinaryOperator(Calculator.BinaryOperator.SUBTRACT);
                 break;
 
             case R.id.fragment_calculator_button_multiply:
-                calculator.applyOperator(Calculator.CalculatorOperator.MULTIPLY);
+                calculator.applyBinaryOperator(Calculator.BinaryOperator.MULTIPLY);
                 break;
 
             case R.id.fragment_calculator_button_divide:
-                calculator.applyOperator(Calculator.CalculatorOperator.DIVIDE);
+                calculator.applyBinaryOperator(Calculator.BinaryOperator.DIVIDE);
+                break;
+
+            case R.id.fragment_calculator_button_remainder:
+                calculator.applyBinaryOperator(Calculator.BinaryOperator.REMAINDER);
                 break;
 
             case R.id.fragment_calculator_button_calculate:
@@ -183,6 +206,34 @@ public class CalculatorFragment extends Fragment implements
 
             case R.id.fragment_calculator_button_clear:
                 calculator.clear();
+                break;
+
+            case R.id.fragment_calculator_button_memory_clear:
+                calculator.memoryClear();
+                break;
+
+            case R.id.fragment_calculator_button_memory_restore:
+                calculator.memoryRestore();
+                break;
+
+            case R.id.fragment_calculator_button_memory_save:
+                calculator.memorySave();
+                break;
+
+            case R.id.fragment_calculator_button_reciprocal:
+                calculator.applyUnaryOperator(Calculator.UnaryOperator.RECIPROCAL);
+                break;
+
+            case R.id.fragment_calculator_button_sqrt:
+                calculator.applyUnaryOperator(Calculator.UnaryOperator.SQRT);
+                break;
+
+            case R.id.fragment_calculator_button_inverse:
+                calculator.applyUnaryOperator(Calculator.UnaryOperator.INVERSE);
+                break;
+
+            case R.id.fragment_calculator_button_dot:
+                calculator.appendDot();
                 break;
         }
     }

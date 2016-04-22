@@ -7,22 +7,38 @@
     <string name="section_title_wolfram_alpha">Wolfram Alpha</string>
 
     <!-- Calculator fragment -->
-    <string name="fragment_calculator_button_1">1</string>
-    <string name="fragment_calculator_button_2">2</string>
-    <string name="fragment_calculator_button_3">3</string>
-    <string name="fragment_calculator_button_4">4</string>
-    <string name="fragment_calculator_button_5">5</string>
-    <string name="fragment_calculator_button_6">6</string>
-    <string name="fragment_calculator_button_7">7</string>
-    <string name="fragment_calculator_button_8">8</string>
-    <string name="fragment_calculator_button_9">9</string>
-    <string name="fragment_calculator_button_0">0</string>
-    <string name="fragment_calculator_button_add">+</string>
-    <string name="fragment_calculator_button_subtract">-</string>
-    <string name="fragment_calculator_button_multiply">*</string>
-    <string name="fragment_calculator_button_divide">/</string>
-    <string name="fragment_calculator_button_calculate">=</string>
-    <string name="fragment_calculator_button_clear">C</string>
 
-    <string name="fragment_calculator_error">Error</string>
+    <!-- Calculator digits -->
+    <string name="calculator_digit_1">1</string>
+    <string name="calculator_digit_2">2</string>
+    <string name="calculator_digit_3">3</string>
+    <string name="calculator_digit_4">4</string>
+    <string name="calculator_digit_5">5</string>
+    <string name="calculator_digit_6">6</string>
+    <string name="calculator_digit_7">7</string>
+    <string name="calculator_digit_8">8</string>
+    <string name="calculator_digit_9">9</string>
+    <string name="calculator_digit_0">0</string>
+
+    <!-- Calculator operations -->
+    <string name="calculator_operation_add">+</string>
+    <string name="calculator_operation_subtract">-</string>
+    <string name="calculator_operation_multiply">×</string>
+    <string name="calculator_operation_divide">÷</string>
+    <string name="calculator_operation_calculate">=</string>
+    <string name="calculator_operation_remainder">%</string>
+    <string name="calculator_operation_reciprocal">1/x</string>
+    <string name="calculator_operation_sqrt">√</string>
+    <string name="calculator_operation_inverse">±</string>
+    <string name="calculator_operation_dot">.</string>
+
+    <!-- Calculator actions -->
+    <string name="calculator_action_clear">C</string>
+    <string name="calculator_action_memory_clear">MC</string>
+    <string name="calculator_action_memory_restore">MR</string>
+    <string name="calculator_action_memory_save">MS</string>
+
+    <!-- Calculator messages -->
+    <string name="calculator_message_error">Error</string>
+    <string name="calculator_message_memory">M</string>
 </resources>

@@ -33,10 +33,10 @@ public class StringUtilsTest {
 
     @Test
     public void calculatorOperatorToCharacter_isCorrect() throws Exception {
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.CalculatorOperator.ADD), "+");
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.CalculatorOperator.SUBTRACT), "−");
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.CalculatorOperator.MULTIPLY), "×");
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.CalculatorOperator.DIVIDE), "÷");
+        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.ADD), "+");
+        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.SUBTRACT), "−");
+        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.MULTIPLY), "×");
+        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.DIVIDE), "÷");
 
         assertNull(StringUtils.calculatorOperatorToCharacter(null));
     }
