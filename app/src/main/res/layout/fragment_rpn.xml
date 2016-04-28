@@ -1,13 +1,20 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.kantrael.calcit.fragment.RPNFragment">
+    android:layout_margin="@dimen/fragment_margin"
+    android:orientation="vertical"
+    tools:context=".fragment.RPNFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/fragment_rpn_listView_result"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="RPN" />
+        android:layout_height="@dimen/rpn_result_height"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/fragment_rpn_button_add_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add result"/>
+
+</LinearLayout>

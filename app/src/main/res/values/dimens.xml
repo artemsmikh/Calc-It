@@ -5,4 +5,6 @@
 
     <dimen name="calculator_result_field_padding">8dp</dimen>
     <dimen name="calculator_buttons_top_margin">16dp</dimen>
+
+    <dimen name="rpn_result_height">70dp</dimen>
 </resources>
