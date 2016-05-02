@@ -150,7 +150,6 @@ public class Calculator {
         switch (op) {
             case INVERSE:
                 currentOperand = StringUtils.doubleToString(currentValue * -1);
-                needToClearOperandBeforeAppend = true;
                 break;
 
             case RECIPROCAL:
@@ -204,6 +203,32 @@ public class Calculator {
             needToClearOperandBeforeAppend = true;
             notifyListenerStateChanged();
         }
+    }
+
+    public void erase() {
+        if (needToClearOperandBeforeAppend) {
+            currentOperand = "0";
+            needToClearOperandBeforeAppend = false;
+        } else {
+            if (!currentOperand.equals("0")) {
+                boolean setToZero = currentOperand.length() == 1
+                        || (currentOperand.length() == 2 && currentOperand.substring(0, 1).equals("-"));
+                if (setToZero) {
+                    currentOperand = "0";
+                } else {
+                    currentOperand = currentOperand.substring(0, currentOperand.length() - 1);
+                }
+            } else {
+                // Operand is 0
+                if (operator != null && previousOperand != null) {
+                    currentOperand = previousOperand;
+                    previousOperand = null;
+                    operator = null;
+                }
+            }
+        }
+
+        notifyListenerStateChanged();
     }
 
 

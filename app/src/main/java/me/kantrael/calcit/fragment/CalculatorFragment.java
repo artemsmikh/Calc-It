@@ -81,7 +81,8 @@ public class CalculatorFragment extends Fragment implements
                 R.id.fragment_calculator_button_reciprocal,
                 R.id.fragment_calculator_button_sqrt,
                 R.id.fragment_calculator_button_inverse,
-                R.id.fragment_calculator_button_dot
+                R.id.fragment_calculator_button_dot,
+                R.id.fragment_calculator_button_erase
         };
 
         for (int buttonId : buttons) {
@@ -234,6 +235,10 @@ public class CalculatorFragment extends Fragment implements
 
             case R.id.fragment_calculator_button_dot:
                 calculator.appendDot();
+                break;
+
+            case R.id.fragment_calculator_button_erase:
+                calculator.erase();
                 break;
         }
     }

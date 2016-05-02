@@ -42,6 +42,11 @@
         android:layout_marginTop="@dimen/calculator_buttons_top_margin"
         android:columnCount="4">
 
+        <!-- Zero row -->
+
+        <Button
+            android:id="@+id/fragment_calculator_button_erase"
+            android:text="@string/calculator_action_erase" />
 
         <!-- First row -->
 

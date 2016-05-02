@@ -37,6 +37,7 @@
     <string name="calculator_action_memory_clear">MC</string>
     <string name="calculator_action_memory_restore">MR</string>
     <string name="calculator_action_memory_save">MS</string>
+    <string name="calculator_action_erase">←</string>
 
     <!-- Calculator messages -->
     <string name="calculator_message_error">Error</string>
