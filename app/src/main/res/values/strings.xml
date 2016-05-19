@@ -27,10 +27,11 @@
     <string name="calculator_operation_divide">÷</string>
     <string name="calculator_operation_calculate">=</string>
     <string name="calculator_operation_remainder">%</string>
-    <string name="calculator_operation_reciprocal">1/x</string>
+    <string name="calculator_operation_reciprocal">1/n</string>
     <string name="calculator_operation_sqrt">√</string>
     <string name="calculator_operation_inverse">±</string>
     <string name="calculator_operation_dot">.</string>
+    <string name="calculator_operation_power">xⁿ</string>
 
     <!-- Calculator actions -->
     <string name="calculator_action_clear">C</string>

@@ -4,10 +4,10 @@ package me.kantrael.calcit.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import me.kantrael.calcit.R;
@@ -86,7 +86,7 @@ public class CalculatorFragment extends Fragment implements
         };
 
         for (int buttonId : buttons) {
-            Button button = (Button) view.findViewById(buttonId);
+            View button = view.findViewById(buttonId);
             if (button != null) {
                 button.setOnClickListener(this);
             }

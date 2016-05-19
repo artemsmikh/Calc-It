@@ -2,11 +2,9 @@ package me.kantrael.calcit;
 
 import org.junit.Test;
 
-import me.kantrael.calcit.calculator.Calculator;
 import me.kantrael.calcit.util.StringUtils;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 public class StringUtilsTest {
     @Test
@@ -29,15 +27,5 @@ public class StringUtilsTest {
         assertEquals(StringUtils.stringToDouble("-1232"), -1232, 0);
         assertEquals(StringUtils.stringToDouble("-0.056"), -0.056, 0);
         assertEquals(StringUtils.stringToDouble("-0.050000060000"), -0.05000006, 0);
-    }
-
-    @Test
-    public void calculatorOperatorToCharacter_isCorrect() throws Exception {
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.ADD), "+");
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.SUBTRACT), "−");
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.MULTIPLY), "×");
-        assertEquals(StringUtils.calculatorOperatorToCharacter(Calculator.BinaryOperator.DIVIDE), "÷");
-
-        assertNull(StringUtils.calculatorOperatorToCharacter(null));
     }
 }
