@@ -26,19 +26,22 @@ public class StringUtils {
         if (operator != null) {
             switch (operator) {
                 case ADD:
-                    return context.getString(R.string.calculator_operation_add);
+                    return context.getString(R.string.calculator_operation_sign_add);
 
                 case SUBTRACT:
-                    return context.getString(R.string.calculator_operation_subtract);
+                    return context.getString(R.string.calculator_operation_sign_subtract);
 
                 case MULTIPLY:
-                    return context.getString(R.string.calculator_operation_multiply);
+                    return context.getString(R.string.calculator_operation_sign_multiply);
 
                 case DIVIDE:
-                    return context.getString(R.string.calculator_operation_divide);
+                    return context.getString(R.string.calculator_operation_sign_divide);
 
                 case REMAINDER:
-                    return context.getString(R.string.calculator_operation_remainder);
+                    return context.getString(R.string.calculator_operation_sign_remainder);
+
+                case POWER:
+                    return context.getString(R.string.calculator_operation_sign_power);
             }
         }
         return null;

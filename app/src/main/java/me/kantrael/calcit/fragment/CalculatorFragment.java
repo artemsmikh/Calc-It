@@ -82,7 +82,8 @@ public class CalculatorFragment extends Fragment implements
                 R.id.fragment_calculator_button_sqrt,
                 R.id.fragment_calculator_button_inverse,
                 R.id.fragment_calculator_button_dot,
-                R.id.fragment_calculator_button_erase
+                R.id.fragment_calculator_button_erase,
+                R.id.fragment_calculator_button_power
         };
 
         for (int buttonId : buttons) {
@@ -199,6 +200,10 @@ public class CalculatorFragment extends Fragment implements
 
             case R.id.fragment_calculator_button_remainder:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.REMAINDER);
+                break;
+
+            case R.id.fragment_calculator_button_power:
+                calculator.applyBinaryOperator(Calculator.BinaryOperator.POWER);
                 break;
 
             case R.id.fragment_calculator_button_calculate:

@@ -20,18 +20,27 @@
     <string name="calculator_digit_9">9</string>
     <string name="calculator_digit_0">0</string>
 
-    <!-- Calculator operations -->
-    <string name="calculator_operation_add">+</string>
-    <string name="calculator_operation_subtract">-</string>
-    <string name="calculator_operation_multiply">×</string>
-    <string name="calculator_operation_divide">÷</string>
-    <string name="calculator_operation_calculate">=</string>
-    <string name="calculator_operation_remainder">%</string>
-    <string name="calculator_operation_reciprocal">1/n</string>
-    <string name="calculator_operation_sqrt">√</string>
-    <string name="calculator_operation_inverse">±</string>
-    <string name="calculator_operation_dot">.</string>
-    <string name="calculator_operation_power">xⁿ</string>
+    <!-- Calculator operations buttons -->
+    <string name="calculator_operation_button_add">+</string>
+    <string name="calculator_operation_button_subtract">-</string>
+    <string name="calculator_operation_button_multiply">×</string>
+    <string name="calculator_operation_button_divide">÷</string>
+    <string name="calculator_operation_button_calculate">=</string>
+    <string name="calculator_operation_button_remainder">%</string>
+    <string name="calculator_operation_button_reciprocal">1/n</string>
+    <string name="calculator_operation_button_sqrt">√</string>
+    <string name="calculator_operation_button_inverse">±</string>
+    <string name="calculator_operation_button_dot">.</string>
+    <string name="calculator_operation_button_power">xⁿ</string>
+
+    <!-- Calculator operations signs -->
+    <string name="calculator_operation_sign_add">+</string>
+    <string name="calculator_operation_sign_subtract">-</string>
+    <string name="calculator_operation_sign_multiply">×</string>
+    <string name="calculator_operation_sign_divide">÷</string>
+    <string name="calculator_operation_sign_remainder">%</string>
+    <string name="calculator_operation_sign_power">^</string>
+
 
     <!-- Calculator actions -->
     <string name="calculator_action_clear">C</string>

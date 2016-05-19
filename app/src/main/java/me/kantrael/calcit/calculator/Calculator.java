@@ -298,6 +298,10 @@ public class Calculator {
                     return false;
                 }
                 break;
+
+            case POWER:
+                currentOperand = StringUtils.doubleToString(Math.pow(previousValue, currentValue));
+                break;
         }
         return true;
     }
@@ -332,7 +336,7 @@ public class Calculator {
      */
 
     public enum BinaryOperator {
-        ADD, SUBTRACT, MULTIPLY, DIVIDE, REMAINDER
+        ADD, SUBTRACT, MULTIPLY, DIVIDE, REMAINDER, POWER
     }
 
     public enum UnaryOperator {
