@@ -6,7 +6,7 @@
     android:padding="@dimen/fragment_margin"
     tools:context=".fragment.CalculatorFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/calculator_result_field_margin_vertical"
@@ -14,31 +14,38 @@
         android:layout_marginRight="@dimen/calculator_result_field_margin_horizontal"
         android:layout_marginTop="@dimen/calculator_result_field_margin_vertical"
         android:background="@color/colorFieldBackground"
-        android:orientation="vertical"
         android:padding="@dimen/calculator_result_field_padding">
 
         <TextView
             android:id="@+id/fragment_calculator_textView_memory"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:gravity="end|center_vertical"
-            android:textColor="@color/colorFont" />
+            android:textColor="@color/colorFont"
+            android:textSize="@dimen/sub_label_text_size" />
 
         <TextView
             android:id="@+id/fragment_calculator_textView_previous_operand"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/fragment_calculator_textView_memory"
+            android:layout_toRightOf="@+id/fragment_calculator_textView_memory"
             android:gravity="end|center_vertical"
-            android:textColor="@color/colorFont" />
+            android:textColor="@color/colorFont"
+            android:textSize="@dimen/sub_label_text_size" />
 
         <TextView
             android:id="@+id/fragment_calculator_textView_result"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_calculator_textView_memory"
             android:gravity="end|center_vertical"
-            android:textColor="@color/colorFont" />
+            android:textColor="@color/colorFont"
+            android:textSize="@dimen/label_text_size" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -207,8 +214,4 @@
 
     </TableLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="#6500ff00" />
 </LinearLayout>

@@ -9,12 +9,10 @@
     <color name="colorButtonDark">#a5c97b</color>
     <color name="colorButtonDarkPressed">#85a364</color>
 
-    <color name="colorAccent">#e8c46a</color>
-    <color name="colorAccentPressed">#c2a459</color>
-
+    <color name="colorAccent">#FFD740</color>
+    <color name="colorAccentPressed">#d9b636</color>
 
     <color name="colorBackground">#F1F8E9</color>
-
 
     <color name="colorNeutral">#DAD4EF</color>
 
