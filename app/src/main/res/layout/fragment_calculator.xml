@@ -9,12 +9,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/calculator_result_field_margin_vertical"
-        android:layout_marginLeft="@dimen/calculator_result_field_margin_horizontal"
-        android:layout_marginRight="@dimen/calculator_result_field_margin_horizontal"
-        android:layout_marginTop="@dimen/calculator_result_field_margin_vertical"
+        android:layout_marginBottom="@dimen/result_field_margin_vertical"
+        android:layout_marginLeft="@dimen/result_field_margin_horizontal"
+        android:layout_marginRight="@dimen/result_field_margin_horizontal"
+        android:layout_marginTop="@dimen/result_field_margin_vertical"
         android:background="@color/colorFieldBackground"
-        android:padding="@dimen/calculator_result_field_padding">
+        android:padding="@dimen/result_field_padding">
 
         <TextView
             android:id="@+id/fragment_calculator_textView_memory"
@@ -52,7 +52,7 @@
         android:layout_height="match_parent"
         android:stretchColumns="*">
 
-        <TableRow android:layout_weight="1">
+        <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
                 android:id="@+id/fragment_calculator_button_memory_clear"
@@ -76,7 +76,7 @@
 
         </TableRow>
 
-        <TableRow android:layout_weight="1">
+        <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
                 android:id="@+id/fragment_calculator_button_erase"
@@ -120,7 +120,7 @@
 
         </TableRow>
 
-        <TableRow android:layout_weight="1">
+        <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
                 android:id="@+id/fragment_calculator_button_7"
@@ -144,7 +144,7 @@
 
         </TableRow>
 
-        <TableRow android:layout_weight="1">
+        <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
                 android:id="@+id/fragment_calculator_button_4"
@@ -168,7 +168,7 @@
 
         </TableRow>
 
-        <TableRow android:layout_weight="1">
+        <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
                 android:id="@+id/fragment_calculator_button_1"
@@ -192,7 +192,7 @@
 
         </TableRow>
 
-        <TableRow android:layout_weight="1">
+        <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
                 android:id="@+id/fragment_calculator_button_dot"

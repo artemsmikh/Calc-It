@@ -3,7 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/result_list_item_padding_vertical"
+    android:paddingEnd="@dimen/result_list_item_padding_horizontal"
+    android:paddingLeft="@dimen/result_list_item_padding_horizontal"
+    android:paddingRight="@dimen/result_list_item_padding_horizontal"
+    android:paddingStart="@dimen/result_list_item_padding_horizontal"
+    android:paddingTop="@dimen/result_list_item_padding_vertical">
 
     <TextView
         android:id="@+id/results_list_item_textView"

@@ -6,9 +6,13 @@
     <dimen name="label_text_size">26sp</dimen>
     <dimen name="sub_label_text_size">18sp</dimen>
 
-    <dimen name="calculator_result_field_margin_horizontal">4dp</dimen>
-    <dimen name="calculator_result_field_margin_vertical">8dp</dimen>
-    <dimen name="calculator_result_field_padding">8dp</dimen>
+    <dimen name="result_field_margin_horizontal">4dp</dimen>
+    <dimen name="result_field_margin_vertical">8dp</dimen>
+    <dimen name="result_field_padding">8dp</dimen>
+    <dimen name="margin_between_result_fields">8dp</dimen>
+    <dimen name="result_list_padding_vertical">4dp</dimen>
+    <dimen name="result_list_item_padding_horizontal">4dp</dimen>
+    <dimen name="result_list_item_padding_vertical">0dp</dimen>
 
     <dimen name="calculator_button_margin">4dp</dimen>
 

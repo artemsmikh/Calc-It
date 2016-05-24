@@ -48,6 +48,7 @@
     <string name="calculator_action_memory_restore">MR</string>
     <string name="calculator_action_memory_save">MS</string>
     <string name="calculator_action_erase">←</string>
+    <string name="calculator_action_enter">Enter</string>
 
     <!-- Calculator messages -->
     <string name="calculator_message_error">Error</string>

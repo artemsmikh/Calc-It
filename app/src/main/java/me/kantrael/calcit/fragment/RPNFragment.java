@@ -50,15 +50,15 @@ public class RPNFragment extends Fragment {
             scrollResultsListViewToBottom();
         }
 
-        Button buttonAddResult = (Button) view.findViewById(R.id.fragment_rpn_button_add_result);
-        if (buttonAddResult != null) {
-            buttonAddResult.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addResult();
-                }
-            });
-        }
+//        Button buttonAddResult = (Button) view.findViewById(R.id.fragment_rpn_button_add_result);
+//        if (buttonAddResult != null) {
+//            buttonAddResult.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    addResult();
+//                }
+//            });
+//        }
 
         return view;
     }
