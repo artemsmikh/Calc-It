@@ -172,13 +172,13 @@ public class BasicCalculator extends Calculator {
         clearErrorState();
         clearPreviousOperandAndOperator();
         currentOperand = "0";
+        needToClearOperandBeforeAppend = false;
 
         notifyListenerStateChanged();
     }
 
     public void memorySave() {
         memoryOperand = getCurrentOperandWithoutTrailingDot();
-        needToClearOperandBeforeAppend = true;
         notifyListenerStateChanged();
     }
 

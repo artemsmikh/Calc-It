@@ -224,12 +224,8 @@
             <TextView
                 android:id="@+id/button_enter"
                 style="@style/CalculatorButtonAccent"
+                android:layout_span="2"
                 android:text="@string/calculator_action_enter" />
-
-            <TextView
-                android:id="@+id/button_calculate"
-                style="@style/CalculatorButtonAccent"
-                android:text="@string/calculator_operation_button_calculate" />
 
         </TableRow>
 

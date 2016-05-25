@@ -93,7 +93,6 @@ public class RPNFragment extends Fragment implements
                     R.id.button_subtract,
                     R.id.button_multiply,
                     R.id.button_divide,
-                    R.id.button_calculate,
                     R.id.button_clear,
                     R.id.button_memory_clear,
                     R.id.button_memory_restore,
@@ -212,10 +211,6 @@ public class RPNFragment extends Fragment implements
 
             case R.id.button_power:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.POWER);
-                break;
-
-            case R.id.button_calculate:
-                calculator.calculate();
                 break;
 
             case R.id.button_clear:

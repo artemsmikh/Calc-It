@@ -3,16 +3,19 @@ package me.kantrael.calcit.calculator;
 import java.util.List;
 import java.util.Stack;
 
+import me.kantrael.calcit.util.StringUtils;
+
 public class RPNCalculator extends Calculator {
 
     private Stack<String> operandsStack;
     private String currentOperand;
     private String memoryOperand;
     private boolean needToClearOperandBeforeAppend;
+    private boolean needToAddOperandToStack;
 
     public RPNCalculator() {
         operandsStack = new Stack<>();
-        currentOperand = "0";
+        setCurrentOperand("0");
     }
 
 
@@ -32,7 +35,17 @@ public class RPNCalculator extends Calculator {
         return memoryOperand != null;
     }
 
+    private void setCurrentOperand(String currentOperand) {
+        if (needToAddOperandToStack) {
+            needToAddOperandToStack = false;
+            operandsStack.push(getCurrentOperandWithoutTrailingDot());
+        }
+        this.currentOperand = currentOperand;
+    }
 
+    private void appendToCurrentOperand(String append) {
+        setCurrentOperand(getCurrentOperand() + append);
+    }
 
     /*
      * Actions
@@ -94,10 +107,10 @@ public class RPNCalculator extends Calculator {
             clearErrorState();
 
             if (needToClearOperandBeforeAppend) {
-                currentOperand = "0.";
+                setCurrentOperand("0.");
                 needToClearOperandBeforeAppend = false;
             } else {
-                currentOperand += ".";
+                appendToCurrentOperand(".");
             }
 
             notifyListenerStateChanged();
@@ -105,25 +118,68 @@ public class RPNCalculator extends Calculator {
     }
 
     public void applyBinaryOperator(BinaryOperator op) {
+        if (op == null) {
+            return;
+        }
+
+        clearErrorState();
+
+        if (needToAddOperandToStack) {
+            needToAddOperandToStack = false;
+        }
+
+        if (calculateCurrentExpression(op)) {
+            needToClearOperandBeforeAppend = true;
+            needToAddOperandToStack = true;
+        }
+
+        notifyListenerStateChanged();
     }
 
     public void applyUnaryOperator(UnaryOperator op) {
-    }
+        if (op == null || getCurrentOperandWithoutTrailingDot() == null) {
+            return;
+        }
 
-    public void calculate() {
+        clearErrorState();
+
+        double currentValue = StringUtils.stringToDouble(getCurrentOperandWithoutTrailingDot());
+
+        switch (op) {
+            case INVERSE:
+                setCurrentOperand(StringUtils.doubleToString(currentValue * -1));
+                break;
+
+            case RECIPROCAL:
+                if (currentValue == 0) {
+                    error = CalculatorError.DIVIDE_BY_ZERO;
+                } else {
+                    setCurrentOperand(StringUtils.doubleToString(1 / currentValue));
+                    needToClearOperandBeforeAppend = true;
+                }
+                break;
+
+            case SQRT:
+                setCurrentOperand(StringUtils.doubleToString(Math.sqrt(currentValue)));
+                needToClearOperandBeforeAppend = true;
+                break;
+        }
+
+        notifyListenerStateChanged();
     }
 
     public void clear() {
         clearErrorState();
         operandsStack.clear();
-        currentOperand = "0";
+        needToAddOperandToStack = false;
+        needToClearOperandBeforeAppend = false;
+        setCurrentOperand("0");
 
         notifyListenerStateChanged();
     }
 
     public void memorySave() {
         memoryOperand = getCurrentOperandWithoutTrailingDot();
-        needToClearOperandBeforeAppend = true;
         notifyListenerStateChanged();
     }
 
@@ -134,29 +190,31 @@ public class RPNCalculator extends Calculator {
 
     public void memoryRestore() {
         if (memoryOperand != null) {
-            currentOperand = memoryOperand;
-            needToClearOperandBeforeAppend = true;
+            setCurrentOperand(memoryOperand);
             notifyListenerStateChanged();
         }
     }
 
     public void erase() {
+        if (needToAddOperandToStack) {
+            needToAddOperandToStack = false;
+        }
         if (needToClearOperandBeforeAppend) {
-            currentOperand = "0";
+            setCurrentOperand("0");
             needToClearOperandBeforeAppend = false;
         } else {
             if (!currentOperand.equals("0")) {
                 boolean setToZero = currentOperand.length() == 1
                         || (currentOperand.length() == 2 && currentOperand.substring(0, 1).equals("-"));
                 if (setToZero) {
-                    currentOperand = "0";
+                    setCurrentOperand("0");
                 } else {
-                    currentOperand = currentOperand.substring(0, currentOperand.length() - 1);
+                    setCurrentOperand( currentOperand.substring(0, currentOperand.length() - 1));
                 }
             } else {
                 // Operand is 0
                 if (!operandsStack.isEmpty()) {
-                    currentOperand = operandsStack.pop();
+                    setCurrentOperand(operandsStack.pop());
                 }
             }
         }
@@ -182,15 +240,61 @@ public class RPNCalculator extends Calculator {
 
         if (!digit.equals("0") || !currentOperand.equals("0")) {
             if (needToClearOperandBeforeAppend) {
-                currentOperand = "0";
+                setCurrentOperand("0");
                 needToClearOperandBeforeAppend = false;
             }
             if (currentOperand.equals("0")) {
-                currentOperand = digit;
+                setCurrentOperand(digit);
             } else {
-                currentOperand += digit;
+                appendToCurrentOperand(digit);
             }
         }
+    }
+
+    private boolean calculateCurrentExpression(BinaryOperator operator) {
+        if (operandsStack.isEmpty()) {
+            return true;
+        }
+
+        double currentValue = StringUtils.stringToDouble(getCurrentOperandWithoutTrailingDot());
+        double previousValue = StringUtils.stringToDouble(operandsStack.pop());
+
+        switch (operator) {
+            case ADD:
+                setCurrentOperand(StringUtils.doubleToString(previousValue + currentValue));
+                break;
+
+            case SUBTRACT:
+                setCurrentOperand(StringUtils.doubleToString(previousValue - currentValue));
+                break;
+
+            case MULTIPLY:
+                setCurrentOperand(StringUtils.doubleToString(previousValue * currentValue));
+                break;
+
+            case DIVIDE:
+                if (currentValue != 0) {
+                    setCurrentOperand(StringUtils.doubleToString(previousValue / currentValue));
+                } else {
+                    error = CalculatorError.DIVIDE_BY_ZERO;
+                    return false;
+                }
+                break;
+
+            case REMAINDER:
+                if (currentValue != 0) {
+                    setCurrentOperand(StringUtils.doubleToString(previousValue % currentValue));
+                } else {
+                    error = CalculatorError.DIVIDE_BY_ZERO;
+                    return false;
+                }
+                break;
+
+            case POWER:
+                setCurrentOperand(StringUtils.doubleToString(Math.pow(previousValue, currentValue)));
+                break;
+        }
+        return true;
     }
 
     private boolean currentOperandHasDot() {
