@@ -17,7 +17,7 @@
         android:padding="@dimen/result_field_padding">
 
         <TextView
-            android:id="@+id/fragment_calculator_textView_memory"
+            android:id="@+id/text_view_memory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -26,21 +26,21 @@
             android:textSize="@dimen/sub_label_text_size" />
 
         <TextView
-            android:id="@+id/fragment_calculator_textView_previous_operand"
+            android:id="@+id/text_view_previous_operand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/fragment_calculator_textView_memory"
-            android:layout_toRightOf="@+id/fragment_calculator_textView_memory"
+            android:layout_toEndOf="@+id/text_view_memory"
+            android:layout_toRightOf="@+id/text_view_memory"
             android:gravity="end|center_vertical"
             android:textColor="@color/colorFont"
             android:textSize="@dimen/sub_label_text_size" />
 
         <TextView
-            android:id="@+id/fragment_calculator_textView_result"
+            android:id="@+id/text_view_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fragment_calculator_textView_memory"
+            android:layout_below="@+id/text_view_memory"
             android:gravity="end|center_vertical"
             android:textColor="@color/colorFont"
             android:textSize="@dimen/label_text_size" />
@@ -55,22 +55,22 @@
         <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
-                android:id="@+id/fragment_calculator_button_memory_clear"
+                android:id="@+id/button_memory_clear"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_action_memory_clear" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_memory_restore"
+                android:id="@+id/button_memory_restore"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_action_memory_restore" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_memory_save"
+                android:id="@+id/button_memory_save"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_action_memory_save" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_clear"
+                android:id="@+id/button_clear"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_action_clear" />
 
@@ -79,18 +79,18 @@
         <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
-                android:id="@+id/fragment_calculator_button_erase"
+                android:id="@+id/button_erase"
                 style="@style/CalculatorButton"
                 android:layout_span="2"
                 android:text="@string/calculator_action_erase" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_power"
+                android:id="@+id/button_power"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_power" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_inverse"
+                android:id="@+id/button_inverse"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_inverse" />
 
@@ -99,22 +99,22 @@
         <TableRow android:layout_weight="1">
 
             <TextView
-                android:id="@+id/fragment_calculator_button_reciprocal"
+                android:id="@+id/button_reciprocal"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_reciprocal" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_remainder"
+                android:id="@+id/button_remainder"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_remainder" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_sqrt"
+                android:id="@+id/button_sqrt"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_sqrt" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_divide"
+                android:id="@+id/button_divide"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_divide" />
 
@@ -123,22 +123,22 @@
         <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
-                android:id="@+id/fragment_calculator_button_7"
+                android:id="@+id/button_7"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_7" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_8"
+                android:id="@+id/button_8"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_8" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_9"
+                android:id="@+id/button_9"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_9" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_multiply"
+                android:id="@+id/button_multiply"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_multiply" />
 
@@ -147,22 +147,22 @@
         <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
-                android:id="@+id/fragment_calculator_button_4"
+                android:id="@+id/button_4"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_4" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_5"
+                android:id="@+id/button_5"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_5" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_6"
+                android:id="@+id/button_6"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_6" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_subtract"
+                android:id="@+id/button_subtract"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_subtract" />
 
@@ -171,22 +171,22 @@
         <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
-                android:id="@+id/fragment_calculator_button_1"
+                android:id="@+id/button_1"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_1" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_2"
+                android:id="@+id/button_2"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_2" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_3"
+                android:id="@+id/button_3"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_3" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_add"
+                android:id="@+id/button_add"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_add" />
 
@@ -195,17 +195,17 @@
         <TableRow style="@style/CalculatorButtonRow">
 
             <TextView
-                android:id="@+id/fragment_calculator_button_dot"
+                android:id="@+id/button_dot"
                 style="@style/CalculatorButton"
                 android:text="@string/calculator_operation_button_dot" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_0"
+                android:id="@+id/button_0"
                 style="@style/CalculatorButtonLight"
                 android:text="@string/calculator_digit_0" />
 
             <TextView
-                android:id="@+id/fragment_calculator_button_calculate"
+                android:id="@+id/button_calculate"
                 style="@style/CalculatorButtonAccent"
                 android:layout_span="2"
                 android:text="@string/calculator_operation_button_calculate" />

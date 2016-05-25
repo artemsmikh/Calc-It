@@ -3,7 +3,7 @@ package me.kantrael.calcit.util;
 import android.content.Context;
 
 import me.kantrael.calcit.R;
-import me.kantrael.calcit.calculator.Calculator;
+import me.kantrael.calcit.calculator.BasicCalculator;
 
 public class StringUtils {
     public static String doubleToString(double value) {
@@ -22,7 +22,7 @@ public class StringUtils {
         }
     }
 
-    public static String calculatorOperatorToCharacter(Calculator.BinaryOperator operator, Context context) {
+    public static String calculatorOperatorToCharacter(BasicCalculator.BinaryOperator operator, Context context) {
         if (operator != null) {
             switch (operator) {
                 case ADD:

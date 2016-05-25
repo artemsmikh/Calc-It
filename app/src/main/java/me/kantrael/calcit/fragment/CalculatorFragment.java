@@ -4,13 +4,13 @@ package me.kantrael.calcit.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import me.kantrael.calcit.R;
+import me.kantrael.calcit.calculator.BasicCalculator;
 import me.kantrael.calcit.calculator.Calculator;
 import me.kantrael.calcit.util.StringUtils;
 
@@ -18,7 +18,8 @@ public class CalculatorFragment extends Fragment implements
         View.OnClickListener,
         Calculator.OnCalculatorResultChangedListener {
 
-    private Calculator calculator;
+    private BasicCalculator calculator;
+
     private TextView textViewResult;
     private TextView textViewPreviousOperand;
     private TextView textViewMemory;
@@ -36,7 +37,7 @@ public class CalculatorFragment extends Fragment implements
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        calculator = new Calculator();
+        calculator = new BasicCalculator();
         calculator.setOnCalculatorResultChangedListener(this);
     }
 
@@ -45,53 +46,9 @@ public class CalculatorFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calculator, container, false);
 
-        textViewResult = (TextView) view.findViewById(
-                R.id.fragment_calculator_textView_result
-        );
-        textViewPreviousOperand = (TextView) view.findViewById(
-                R.id.fragment_calculator_textView_previous_operand
-        );
-        textViewMemory = (TextView) view.findViewById(
-                R.id.fragment_calculator_textView_memory
-        );
+        initUI(view);
 
         updateCalculatorView();
-
-        int[] buttons = {
-                R.id.fragment_calculator_button_0,
-                R.id.fragment_calculator_button_1,
-                R.id.fragment_calculator_button_2,
-                R.id.fragment_calculator_button_3,
-                R.id.fragment_calculator_button_4,
-                R.id.fragment_calculator_button_5,
-                R.id.fragment_calculator_button_6,
-                R.id.fragment_calculator_button_7,
-                R.id.fragment_calculator_button_8,
-                R.id.fragment_calculator_button_9,
-                R.id.fragment_calculator_button_add,
-                R.id.fragment_calculator_button_subtract,
-                R.id.fragment_calculator_button_multiply,
-                R.id.fragment_calculator_button_divide,
-                R.id.fragment_calculator_button_calculate,
-                R.id.fragment_calculator_button_clear,
-                R.id.fragment_calculator_button_memory_clear,
-                R.id.fragment_calculator_button_memory_restore,
-                R.id.fragment_calculator_button_memory_save,
-                R.id.fragment_calculator_button_remainder,
-                R.id.fragment_calculator_button_reciprocal,
-                R.id.fragment_calculator_button_sqrt,
-                R.id.fragment_calculator_button_inverse,
-                R.id.fragment_calculator_button_dot,
-                R.id.fragment_calculator_button_erase,
-                R.id.fragment_calculator_button_power
-        };
-
-        for (int buttonId : buttons) {
-            View button = view.findViewById(buttonId);
-            if (button != null) {
-                button.setOnClickListener(this);
-            }
-        }
 
         return view;
     }
@@ -101,37 +58,80 @@ public class CalculatorFragment extends Fragment implements
      * UI
      */
 
-    private void updateCalculatorView() {
-        if (calculator == null) {
-            return;
+    private void initUI(View parent) {
+        if (parent != null) {
+            textViewResult = (TextView) parent.findViewById(R.id.text_view_result);
+            textViewPreviousOperand = (TextView) parent.findViewById(R.id.text_view_previous_operand);
+            textViewMemory = (TextView) parent.findViewById(R.id.text_view_memory);
+
+            initButtons(parent);
         }
+    }
 
-        String resultText;
-        if (calculator.getError() == Calculator.CalculatorError.DIVIDE_BY_ZERO) {
-            resultText = getString(R.string.calculator_message_error);
-        } else {
-            resultText = calculator.getCurrentOperand();
-        }
-        textViewResult.setText(resultText);
+    private void initButtons(View parent) {
+        if (parent != null) {
+            int[] buttons = {
+                    R.id.button_0,
+                    R.id.button_1,
+                    R.id.button_2,
+                    R.id.button_3,
+                    R.id.button_4,
+                    R.id.button_5,
+                    R.id.button_6,
+                    R.id.button_7,
+                    R.id.button_8,
+                    R.id.button_9,
+                    R.id.button_add,
+                    R.id.button_subtract,
+                    R.id.button_multiply,
+                    R.id.button_divide,
+                    R.id.button_calculate,
+                    R.id.button_clear,
+                    R.id.button_memory_clear,
+                    R.id.button_memory_restore,
+                    R.id.button_memory_save,
+                    R.id.button_remainder,
+                    R.id.button_reciprocal,
+                    R.id.button_sqrt,
+                    R.id.button_inverse,
+                    R.id.button_dot,
+                    R.id.button_erase,
+                    R.id.button_power
+            };
 
-        String previousOperandText = "";
-        if (calculator.hasPreviousOperand()) {
-            String operand = calculator.getPreviousOperand();
-            String operator = StringUtils.calculatorOperatorToCharacter(
-                    calculator.getOperator(),
-                    getActivity()
-            );
-
-            if (operand != null && operator != null) {
-                previousOperandText = String.format("%s %s", operand, operator);
+            for (int buttonId : buttons) {
+                View button = parent.findViewById(buttonId);
+                if (button != null) {
+                    button.setOnClickListener(this);
+                }
             }
         }
+    }
+
+    private void updateCalculatorView() {
+        boolean divideByZero = calculator.getError() == Calculator.CalculatorError.DIVIDE_BY_ZERO;
+        String resultText = divideByZero
+                ? getString(R.string.calculator_message_error)
+                : calculator.getCurrentOperand();
+        textViewResult.setText(resultText);
+
+
+        String operand = calculator.getPreviousOperand();
+        String operator = StringUtils.calculatorOperatorToCharacter(
+                calculator.getOperator(),
+                getActivity()
+        );
+        boolean hasPreviousOperand = operand != null && operator != null;
+        String previousOperandText = hasPreviousOperand
+                ? String.format("%s %s", operand, operator)
+                : null;
         textViewPreviousOperand.setText(previousOperandText);
 
-        textViewMemory.setText(calculator.hasOperandInMemory()
+
+        String memoryText = calculator.hasOperandInMemory()
                 ? getString(R.string.calculator_message_memory)
-                : null
-        );
+                : null;
+        textViewMemory.setText(memoryText);
     }
 
 
@@ -142,107 +142,107 @@ public class CalculatorFragment extends Fragment implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fragment_calculator_button_0:
+            case R.id.button_0:
                 calculator.appendDigit(Calculator.CalculatorDigit.ZERO);
                 break;
 
-            case R.id.fragment_calculator_button_1:
+            case R.id.button_1:
                 calculator.appendDigit(Calculator.CalculatorDigit.ONE);
                 break;
 
-            case R.id.fragment_calculator_button_2:
+            case R.id.button_2:
                 calculator.appendDigit(Calculator.CalculatorDigit.TWO);
                 break;
 
-            case R.id.fragment_calculator_button_3:
+            case R.id.button_3:
                 calculator.appendDigit(Calculator.CalculatorDigit.THREE);
                 break;
 
-            case R.id.fragment_calculator_button_4:
+            case R.id.button_4:
                 calculator.appendDigit(Calculator.CalculatorDigit.FOUR);
                 break;
 
-            case R.id.fragment_calculator_button_5:
+            case R.id.button_5:
                 calculator.appendDigit(Calculator.CalculatorDigit.FIVE);
                 break;
 
-            case R.id.fragment_calculator_button_6:
+            case R.id.button_6:
                 calculator.appendDigit(Calculator.CalculatorDigit.SIX);
                 break;
 
-            case R.id.fragment_calculator_button_7:
+            case R.id.button_7:
                 calculator.appendDigit(Calculator.CalculatorDigit.SEVEN);
                 break;
 
-            case R.id.fragment_calculator_button_8:
+            case R.id.button_8:
                 calculator.appendDigit(Calculator.CalculatorDigit.EIGHT);
                 break;
 
-            case R.id.fragment_calculator_button_9:
+            case R.id.button_9:
                 calculator.appendDigit(Calculator.CalculatorDigit.NINE);
                 break;
 
-            case R.id.fragment_calculator_button_add:
+            case R.id.button_add:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.ADD);
                 break;
 
-            case R.id.fragment_calculator_button_subtract:
+            case R.id.button_subtract:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.SUBTRACT);
                 break;
 
-            case R.id.fragment_calculator_button_multiply:
+            case R.id.button_multiply:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.MULTIPLY);
                 break;
 
-            case R.id.fragment_calculator_button_divide:
+            case R.id.button_divide:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.DIVIDE);
                 break;
 
-            case R.id.fragment_calculator_button_remainder:
+            case R.id.button_remainder:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.REMAINDER);
                 break;
 
-            case R.id.fragment_calculator_button_power:
+            case R.id.button_power:
                 calculator.applyBinaryOperator(Calculator.BinaryOperator.POWER);
                 break;
 
-            case R.id.fragment_calculator_button_calculate:
+            case R.id.button_calculate:
                 calculator.calculate();
                 break;
 
-            case R.id.fragment_calculator_button_clear:
+            case R.id.button_clear:
                 calculator.clear();
                 break;
 
-            case R.id.fragment_calculator_button_memory_clear:
+            case R.id.button_memory_clear:
                 calculator.memoryClear();
                 break;
 
-            case R.id.fragment_calculator_button_memory_restore:
+            case R.id.button_memory_restore:
                 calculator.memoryRestore();
                 break;
 
-            case R.id.fragment_calculator_button_memory_save:
+            case R.id.button_memory_save:
                 calculator.memorySave();
                 break;
 
-            case R.id.fragment_calculator_button_reciprocal:
+            case R.id.button_reciprocal:
                 calculator.applyUnaryOperator(Calculator.UnaryOperator.RECIPROCAL);
                 break;
 
-            case R.id.fragment_calculator_button_sqrt:
+            case R.id.button_sqrt:
                 calculator.applyUnaryOperator(Calculator.UnaryOperator.SQRT);
                 break;
 
-            case R.id.fragment_calculator_button_inverse:
+            case R.id.button_inverse:
                 calculator.applyUnaryOperator(Calculator.UnaryOperator.INVERSE);
                 break;
 
-            case R.id.fragment_calculator_button_dot:
+            case R.id.button_dot:
                 calculator.appendDot();
                 break;
 
-            case R.id.fragment_calculator_button_erase:
+            case R.id.button_erase:
                 calculator.erase();
                 break;
         }
