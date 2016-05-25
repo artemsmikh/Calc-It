@@ -115,7 +115,6 @@ public class CalculatorFragment extends Fragment implements
                 : calculator.getCurrentOperand();
         textViewResult.setText(resultText);
 
-
         String operand = calculator.getPreviousOperand();
         String operator = StringUtils.calculatorOperatorToCharacter(
                 calculator.getOperator(),
@@ -126,7 +125,6 @@ public class CalculatorFragment extends Fragment implements
                 ? String.format("%s %s", operand, operator)
                 : null;
         textViewPreviousOperand.setText(previousOperandText);
-
 
         String memoryText = calculator.hasOperandInMemory()
                 ? getString(R.string.calculator_message_memory)

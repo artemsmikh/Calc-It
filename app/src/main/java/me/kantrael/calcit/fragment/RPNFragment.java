@@ -10,21 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.kantrael.calcit.R;
 import me.kantrael.calcit.adapter.ResultsListAdapter;
 import me.kantrael.calcit.calculator.Calculator;
 import me.kantrael.calcit.calculator.RPNCalculator;
+import me.kantrael.calcit.util.StringUtils;
 
 public class RPNFragment extends Fragment implements
-        View.OnClickListener {
+        View.OnClickListener,
+        Calculator.OnCalculatorResultChangedListener {
 
     private RPNCalculator calculator;
-    private List<String> operandsStack;
 
-    private ListView listViewOperators;
+    private ListView listViewOperands;
     private TextView textViewResult;
     private TextView textViewMemory;
 
@@ -42,7 +40,7 @@ public class RPNFragment extends Fragment implements
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         calculator = new RPNCalculator();
-        operandsStack = new ArrayList<>();
+        calculator.setOnCalculatorResultChangedListener(this);
     }
 
     @Override
@@ -67,10 +65,11 @@ public class RPNFragment extends Fragment implements
             textViewResult = (TextView) parent.findViewById(R.id.text_view_result);
             textViewMemory = (TextView) parent.findViewById(R.id.text_view_memory);
 
-            listViewOperators = (ListView) parent.findViewById(R.id.list_view_operators);
-            if (listViewOperators != null) {
-                ResultsListAdapter adapter = new ResultsListAdapter(operandsStack, getActivity());
-                listViewOperators.setAdapter(adapter);
+            listViewOperands = (ListView) parent.findViewById(R.id.list_view_operands);
+            if (listViewOperands != null && calculator != null) {
+                ResultsListAdapter adapter = new ResultsListAdapter(
+                        calculator.getOperandsStack(), getActivity());
+                listViewOperands.setAdapter(adapter);
             }
 
             initButtons(parent);
@@ -119,14 +118,27 @@ public class RPNFragment extends Fragment implements
     }
 
     private void updateCalculatorView() {
+        boolean divideByZero = calculator.getError() == Calculator.CalculatorError.DIVIDE_BY_ZERO;
+        String resultText = divideByZero
+                ? getString(R.string.calculator_message_error)
+                : calculator.getCurrentOperand();
+        textViewResult.setText(resultText);
 
+        String memoryText = calculator.hasOperandInMemory()
+                ? getString(R.string.calculator_message_memory)
+                : null;
+        textViewMemory.setText(memoryText);
+
+        // Update operands stack
+        ((ResultsListAdapter) listViewOperands.getAdapter()).notifyDataSetChanged();
+        scrollResultsListViewToBottom();
     }
 
     private void scrollResultsListViewToBottom() {
-        listViewOperators.post(new Runnable() {
+        listViewOperands.post(new Runnable() {
             @Override
             public void run() {
-                listViewOperators.setSelection(listViewOperators.getAdapter().getCount() - 1);
+                listViewOperands.setSelection(listViewOperands.getAdapter().getCount() - 1);
             }
         });
     }
@@ -246,6 +258,16 @@ public class RPNFragment extends Fragment implements
                 calculator.enter();
                 break;
         }
+    }
+
+
+    /*
+     * Calculator.OnCalculatorResultChangedListener
+     */
+
+    @Override
+    public void onCalculatorStateChanged() {
+        updateCalculatorView();
     }
 }
 

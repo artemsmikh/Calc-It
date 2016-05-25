@@ -15,7 +15,9 @@
         android:id="@+id/results_list_item_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="start"
         android:gravity="end|center_vertical"
+        android:singleLine="true"
         android:textColor="@color/colorFont" />
 
 </LinearLayout>
