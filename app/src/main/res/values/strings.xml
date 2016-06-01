@@ -6,8 +6,6 @@
     <string name="section_title_rpn">RPN</string>
     <string name="section_title_wolfram_alpha">Wolfram Alpha</string>
 
-    <!-- BasicCalculator fragment -->
-
     <!-- BasicCalculator digits -->
     <string name="calculator_digit_1">1</string>
     <string name="calculator_digit_2">2</string>
@@ -53,4 +51,8 @@
     <!-- BasicCalculator messages -->
     <string name="calculator_message_error">Error</string>
     <string name="calculator_message_memory">M</string>
+
+    <!-- Notifications -->
+    <string name="error_empty_query">Введите текст для запроса.</string>
+    <string name="error_try_again">Произошла ошибка при запросе, попробуйте ещё раз.</string>
 </resources>

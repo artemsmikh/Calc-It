@@ -2,7 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.kantrael.calcit.fragment.WolframAlphaFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="me.kantrael.calcit.fragment.WolframAlphaFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/edit_text_query"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:inputType="none" />
+
+        <Button
+            android:id="@+id/button_test"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_view_results"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#25ff0000" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
