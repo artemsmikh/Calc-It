@@ -62,5 +62,5 @@
     <!-- Messages -->
     <string name="message_enter_query">Enter a text to search through the Wolfram|Alpha</string>
     <string name="message_query">Text to search</string>
-    <string name="message_no_results">Wolfram|Alpha doesn't know how to interpret your input.</string>
+    <string name="message_no_results">Wolfram|Alpha doesn\'t know how to interpret your input.</string>
 </resources>

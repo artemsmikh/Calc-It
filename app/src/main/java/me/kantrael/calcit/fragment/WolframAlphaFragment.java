@@ -98,8 +98,6 @@ public class WolframAlphaFragment extends Fragment {
             }
         });
 
-        showEmptyScreenMessage();
-
         return view;
     }
 
@@ -136,7 +134,7 @@ public class WolframAlphaFragment extends Fragment {
                 if (response.isSuccessful()) {
                     boolean responseProcessed = processResponseString(response.body().string());
 
-                    if (responseProcessed && adapter.getCount() > 0) {
+                    if (responseProcessed) {
                         showResultList();
                     } else {
                         onEmptyResult();
