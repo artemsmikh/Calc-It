@@ -5,36 +5,82 @@
     android:orientation="vertical"
     tools:context="me.kantrael.calcit.fragment.WolframAlphaFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin">
 
         <EditText
             android:id="@+id/edit_text_query"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:inputType="none" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/wolfram_edit_text_top_margin"
+            android:layout_toLeftOf="@+id/button_search"
+            android:layout_toStartOf="@+id/button_search"
+            android:hint="@string/message_query"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textSize="@dimen/button_text_size" />
 
-        <Button
-            android:id="@+id/button_test"
+        <TextView
+            android:id="@+id/button_search"
+            style="@style/CalculatorButtonAccent"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@mipmap/ic_launcher" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:padding="@dimen/default_margin_small"
+            android:text="@string/action_search" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <ListView
-        android:id="@+id/list_view_results"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#25ff0000" />
+        android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ListView
+            android:id="@+id/list_view_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin_big"
+            android:layout_marginLeft="@dimen/default_margin_big"
+            android:layout_marginRight="@dimen/default_margin_big"
+            android:layout_marginStart="@dimen/default_margin_big"
+            android:layout_marginTop="@dimen/default_margin"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="1dp"
+            android:listSelector="@android:color/transparent"
+            android:visibility="invisible" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_margin_big"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/text_view_enter_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/wolfram_empty_message_margin"
+            android:layout_marginLeft="@dimen/wolfram_empty_message_margin"
+            android:layout_marginRight="@dimen/wolfram_empty_message_margin"
+            android:layout_marginStart="@dimen/wolfram_empty_message_margin"
+            android:layout_marginTop="@dimen/default_margin_big"
+            android:gravity="center"
+            android:text="@string/message_enter_query"
+            android:textSize="@dimen/wolfram_results_empty_message_text_size" />
+
+    </RelativeLayout>
 
 </LinearLayout>

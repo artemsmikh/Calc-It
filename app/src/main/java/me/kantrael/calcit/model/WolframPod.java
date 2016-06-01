@@ -9,11 +9,11 @@ import java.util.List;
 @Root(name = "pod", strict = false)
 public class WolframPod {
     @Attribute(required = false)
-    private String title;
+    public String title;
 
     @Attribute
-    private boolean error;
+    public boolean error;
 
     @ElementList(inline = true)
-    private List<WolframSubPod> subPods;
+    public List<WolframSubPod> subPods;
 }

@@ -6,11 +6,11 @@ import org.simpleframework.xml.Root;
 @Root(strict = false)
 public class WolframImage {
     @Attribute(name = "src")
-    private String url;
+    public String url;
 
     @Attribute
-    private int width;
+    public int width;
 
     @Attribute
-    private int height;
+    public int height;
 }

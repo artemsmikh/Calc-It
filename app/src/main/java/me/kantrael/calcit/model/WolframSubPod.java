@@ -6,8 +6,8 @@ import org.simpleframework.xml.Root;
 @Root(name = "subpod", strict = false)
 public class WolframSubPod {
     @Element(name = "plaintext", required = false)
-    private String text;
+    public String text;
 
     @Element(name = "img")
-    private WolframImage image;
+    public WolframImage image;
 }

@@ -24,12 +24,20 @@ public class UrlUtils {
         builder.addQueryParameter(Config.WolframAlpha.REQUEST_PARAM_INPUT, query);
 
         // Result images maximum width
-        if (resultWidth > 0) {
-            builder.addQueryParameter(
-                    Config.WolframAlpha.REQUEST_PARAM_WIDTH,
-                    Integer.toString(resultWidth)
-            );
+        if (resultWidth <= 0) {
+            resultWidth = Config.WolframAlpha.REQUEST_PARAM_WIDTH_DEFAULT_VALUE;
         }
+
+        builder.addQueryParameter(
+                Config.WolframAlpha.REQUEST_PARAM_WIDTH,
+                Integer.toString(resultWidth)
+        );
+
+        // Result images scale
+        builder.addQueryParameter(
+                Config.WolframAlpha.REQUEST_PARAM_MAGNIFY,
+                Integer.toString(Config.WolframAlpha.REQUEST_PARAM_MAGNIFY_VALUE)
+        );
 
         return builder.build();
     }

@@ -9,11 +9,11 @@ import java.util.List;
 @Root(strict = false)
 public class WolframResult {
     @Attribute
-    private boolean success;
+    public boolean success;
 
     @Attribute
-    private boolean error;
+    public boolean error;
 
     @ElementList(inline = true)
-    private List<WolframPod> pods;
+    public List<WolframPod> pods;
 }

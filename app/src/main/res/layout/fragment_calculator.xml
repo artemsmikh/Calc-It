@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/fragment_margin"
+    android:padding="@dimen/default_margin"
     tools:context=".fragment.CalculatorFragment">
 
     <RelativeLayout
@@ -24,7 +24,7 @@
             android:layout_alignParentTop="true"
             android:gravity="end|center_vertical"
             android:singleLine="true"
-            android:textColor="@color/colorFont"
+            android:textColor="@color/colorText"
             android:textSize="@dimen/sub_label_text_size" />
 
         <me.grantland.widget.AutofitTextView
@@ -37,7 +37,7 @@
             android:ellipsize="start"
             android:gravity="end|center_vertical"
             android:singleLine="true"
-            android:textColor="@color/colorFont"
+            android:textColor="@color/colorText"
             android:textSize="@dimen/sub_label_text_size"
             autofit:minTextSize="@dimen/label_text_size_min" />
 
@@ -49,7 +49,7 @@
             android:ellipsize="start"
             android:gravity="end|center_vertical"
             android:singleLine="true"
-            android:textColor="@color/colorFont"
+            android:textColor="@color/colorText"
             android:textSize="@dimen/label_text_size"
             autofit:minTextSize="@dimen/label_text_size_min" />
 
